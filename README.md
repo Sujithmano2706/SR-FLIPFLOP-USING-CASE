@@ -34,7 +34,33 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 
 **Procedure**
 
-/* write all the steps invloved */
+/*
+Write the functional table (above) and decide reset behavior (asynchronous sync, active low, etc.).
+
+Choose modelling style: behavioural (recommended for clarity), dataflow, or structural. We'll provide behavioural + a simple dataflow version.
+
+Write the Verilog module for the SR flip-flop (use non-blocking assignments <= inside always @(posedge clk ...)). Include optional asynchronous reset if you want.
+
+Create a testbench that:
+
+Generates a clock (e.g., 10 ns period)
+
+Applies S and R combinations around clock rising edges
+
+Includes the forbidden S=R=1 case to observe behavior
+
+Logs outputs and optionally dumps waveform ($dumpfile/$dumpvars for Icarus/GTKWave)
+
+Simulate with your simulator (Icarus Verilog + GTKWave or ModelSim). Example commands:
+
+Icarus: iverilog -o sr_tb.vvp sr_ff.v sr_tb.v then vvp sr_tb.vvp
+
+View waveforms: gtkwave dump.vcd
+
+Compare waveforms/console prints to expected functional table values / test vector table. Check Q at each posedge clk.
+
+Document results: pass/fail per test vector, record any unexpected x or glitch. If x occurs, review reset/initialization and S/R timing relative to clock.
+*/
 
 **PROGRAM**
 ```
